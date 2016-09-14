@@ -157,9 +157,9 @@ def customiseRecoCentralityEP(process):
     
     process.recoCentralityEP = cms.Path(
         process.pACentrality
-        + process.centralityBin_HFPlusFwd
-        + process.centralityBin_HFMinusFwd
-        + process.centralityBin_HFSumFwd
+        + process.centralityBinHFPlusFwd
+        + process.centralityBinHFMinusFwd
+        + process.centralityBinHFSumFwd
         + process.hiEvtPlane
         )
 
@@ -178,14 +178,14 @@ def storePPbAdditionalAOD(process):
         process.AODoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        process.AODoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
+        process.AODoutput.outputCommands.extend(['keep *_centralityBin*_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        process.AODSIMoutput.outputCommands.extend(['keep *_centralityBin_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep *_centralityBin*_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
 
     return process
