@@ -14,10 +14,9 @@ centralityBinHFMinusFwd = cms.EDProducer('CentralityBinProducer',
     pPbRunFlip = cms.uint32(99999999),
 )
 
-centralityBinHFSumFwd = cms.EDProducer('CentralityBinProducer',
+centralityBinHFSum = cms.EDProducer('CentralityBinProducer',
     Centrality = cms.InputTag("pACentrality"),
     centralityVariable = cms.string("HFtowers"),
     nonDefaultGlauberModel = cms.string(""),
     pPbRunFlip = cms.uint32(99999999),
 )
-

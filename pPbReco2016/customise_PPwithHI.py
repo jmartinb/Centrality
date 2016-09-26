@@ -1,4 +1,4 @@
-mport FWCore.ParameterSet.Config as cms
+import FWCore.ParameterSet.Config as cms
 
 # Customize process to run HI-style photon isolation in the pp RECO sequences
 def addHIIsolationProducer(process):
@@ -143,24 +143,21 @@ def customiseRecoCentralityEP(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
     process.load('RecoHI.HiCentralityAlgos.pACentralityBin_cfi')
-    process.load('RecoHI.HiEvtPlaneAlgos.HiEvtPlane_cfi')
+    process.load('RecoHI.HiEvtPlaneAlgos.pAEvtPlane_cfi')
     process.pACentrality.produceHFhits = cms.bool(False)
     process.pACentrality.produceEcalhits = cms.bool(False)
     process.pACentrality.produceETmidRapidity = cms.bool(False)
     process.pACentrality.producePixelhits = cms.bool(False)
     process.pACentrality.producePixelTracks = cms.bool(False)
-    process.hiEvtPlane.vertexTag = cms.InputTag("offlinePrimaryVertices")
-    process.hiEvtPlane.trackTag = cms.InputTag("generalTracks")
-    process.hiEvtPlane.centralityBinTag = cms.InputTag("centralityBin","HFtowersPlusTrunc")
-    process.hiEvtPlane.centralityVariable = cms.string("HFtowersPlusTrunc")
-    process.hiEvtPlane.nonDefaultGlauberModel = cms.string("")
     
     process.recoCentralityEP = cms.Path(
         process.pACentrality
         + process.centralityBinHFPlusFwd
         + process.centralityBinHFMinusFwd
         + process.centralityBinHFSumFwd
-        + process.hiEvtPlane
+        + process.hiEvtPlaneHFPlusFwd
+        + process.hiEvtPlaneHFMinusFwd
+        + process.hiEvtPlaneHFSum
         )
 
     process.schedule.append(process.recoCentralityEP)
@@ -179,14 +176,14 @@ def storePPbAdditionalAOD(process):
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
         process.AODoutput.outputCommands.extend(['keep *_centralityBin*_*_*'])
-        process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
+        process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane*_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep *_centralityBin*_*_*'])
-        process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_hiEvtPlane*_*_*'])
 
     return process
 
