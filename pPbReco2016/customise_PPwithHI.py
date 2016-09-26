@@ -154,7 +154,7 @@ def customiseRecoCentralityEP(process):
         process.pACentrality
         + process.centralityBinHFPlusFwd
         + process.centralityBinHFMinusFwd
-        + process.centralityBinHFSumFwd
+        + process.centralityBinHFSum
         + process.hiEvtPlaneHFPlusFwd
         + process.hiEvtPlaneHFMinusFwd
         + process.hiEvtPlaneHFSum
