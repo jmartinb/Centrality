@@ -20,3 +20,17 @@ centralityBinHFSum = cms.EDProducer('CentralityBinProducer',
     nonDefaultGlauberModel = cms.string(""),
     pPbRunFlip = cms.uint32(99999999),
 )
+
+centralityBinZDCPlus = cms.EDProducer('CentralityBinProducer',
+    Centrality = cms.InputTag("pACentrality"),
+    centralityVariable = cms.string("ZDChitsPlus"),
+    nonDefaultGlauberModel = cms.string(""),
+    pPbRunFlip = cms.uint32(99999999),
+    )
+
+centralityBinZDCMinus = cms.EDProducer('CentralityBinProducer',
+    Centrality = cms.InputTag("pACentrality"),
+    centralityVariable = cms.string("ZDChitsMinus"),
+    nonDefaultGlauberModel = cms.string(""),
+    pPbRunFlip = cms.uint32(99999999),
+    )
