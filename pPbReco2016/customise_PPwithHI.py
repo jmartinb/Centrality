@@ -155,9 +155,13 @@ def customiseRecoCentralityEP(process):
         + process.centralityBinHFPlusFwd
         + process.centralityBinHFMinusFwd
         + process.centralityBinHFSum
+        + process.centralityBinZDCPlus
+        + process.centralityBinZDCMinus
         + process.hiEvtPlaneHFPlusFwd
         + process.hiEvtPlaneHFMinusFwd
         + process.hiEvtPlaneHFSum
+        + process.hiEvtPlaneZDCPlus
+        + process.hiEvtPlaneZDCMinus
         )
 
     process.schedule.append(process.recoCentralityEP)
