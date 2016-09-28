@@ -193,12 +193,12 @@ def storePPbAdditionalAOD(process):
 
 def customisePPrecoforPPb(process):
  
-     process=addHIIsolationProducer(process)
-     process=storeCaloTowersAOD(process)
-     process=customiseRecoCentralityEP(process)
-     process=storePPbAdditionalAOD(process) 
+    process=addHIIsolationProducer(process)
+    process=storeCaloTowersAOD(process)
+    process=customiseRecoCentralityEP(process)
+    process=storePPbAdditionalAOD(process)
 
-     return process
+    return process
  
 def customisePPrecoForPeripheralPbPb(process):
 
@@ -206,4 +206,4 @@ def customisePPrecoForPeripheralPbPb(process):
     process=modifyClusterLimits(process)
     process=storeCaloTowersAOD(process)
 
-return process
+    return process
