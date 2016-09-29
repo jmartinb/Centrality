@@ -138,8 +138,8 @@ def storeCaloTowersAOD(process):
     return process
 
 
-# Add Centrality and Event Plane reconstruction in pp reco 
-def customiseRecoCentralityEP(process):
+# Add Centrality reconstruction in pp reco
+def customiseRecoCentrality(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
     process.pACentrality.produceHFhits = cms.bool(False)
@@ -148,11 +148,11 @@ def customiseRecoCentralityEP(process):
     process.pACentrality.producePixelhits = cms.bool(False)
     process.pACentrality.producePixelTracks = cms.bool(False)
     
-    process.recoCentralityEP = cms.Path(
+    process.recoCentrality = cms.Path(
         process.pACentrality
         )
 
-    process.schedule.append(process.recoCentralityEP)
+    process.schedule.append(process.recoCentrality)
 
     return process
 
