@@ -142,10 +142,6 @@ def storeCaloTowersAOD(process):
 def customiseRecoCentrality(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
-    process.pACentrality.produceHFhits = cms.bool(False)
-    process.pACentrality.produceEcalhits = cms.bool(False)
-    process.pACentrality.produceETmidRapidity = cms.bool(False)
-    process.pACentrality.producePixelhits = cms.bool(False)
     process.pACentrality.producePixelTracks = cms.bool(False)
     
     process.recoCentrality = cms.Path(
