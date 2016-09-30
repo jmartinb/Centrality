@@ -175,7 +175,7 @@ def customisePPrecoforPPb(process):
  
     process=addHIIsolationProducer(process)
     process=storeCaloTowersAOD(process)
-    process=customiseRecoCentralityEP(process)
+    process=customiseRecoCentrality(process)
     process=storePPbAdditionalAOD(process)
 
     return process
