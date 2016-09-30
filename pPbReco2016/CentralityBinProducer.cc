@@ -111,7 +111,7 @@ CentralityBinProducer::CentralityBinProducer(const edm::ParameterSet& iConfig):
        "Supported variables are: \n" + "HFtowers HFtowersPlus HFtowersMinus HFtowersTrunc HFtowersPlusTrunc HFtowersMinusTrunc HFhits PixelHits PixelTracks Tracks EB EE" + "\n";
      throw cms::Exception("Configuration",errorMessage);
    }
-  
+
    if(iConfig.exists("nonDefaultGlauberModel")){
      centralityMC_ = iConfig.getParameter<std::string>("nonDefaultGlauberModel");
    }
@@ -123,10 +123,10 @@ CentralityBinProducer::CentralityBinProducer(const edm::ParameterSet& iConfig):
 
 CentralityBinProducer::~CentralityBinProducer()
 {
-  
+
    // do anything here that needs to be done at desctruction time
    // (e.g. close files, deallocate resources etc.)
-  
+
 }
 
 
@@ -163,15 +163,14 @@ CentralityBinProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup
 
   int bin = inputDB_->m_table.size() - 1;
   for(unsigned int i = 0; i < inputDB_->m_table.size(); ++i){
-    
+
     if(value >= inputDB_->m_table[i].bin_edge && value){
       bin = i; break;
     }
 
   }
 
-  std::auto_ptr<int> binp(new int(bin));
-  iEvent.put(binp,centralityVariable_.data());
+  iEvent.put(std::make_unique<int>(bin),centralityVariable_.data());
 
 }
 
