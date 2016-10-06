@@ -190,7 +190,7 @@ def customiseRecoCentralityEP(process):
     return process
 
 
-# Add ZDC and Centrality to AOD event content
+# Add ZDC, Centrality and Event Plane to AOD event content
 def storePPbAdditionalAOD(process):
 
     process.load('Configuration.EventContent.EventContent_cff')
