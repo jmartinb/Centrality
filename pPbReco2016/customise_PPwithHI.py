@@ -197,11 +197,13 @@ def storePPbAdditionalAOD(process):
     if hasattr(process,'AODoutput'):
         process.AODoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
+        process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
 
     return process
