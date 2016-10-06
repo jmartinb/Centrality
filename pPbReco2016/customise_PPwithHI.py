@@ -175,22 +175,20 @@ def addRhoProducer(process):
 
     return process
 
-# Add Centrality and Event Plane reconstruction in pp reco
-def customiseRecoCentralityEP(process):
+# Add Centrality reconstruction in pp reco
+def customiseRecoCentrality(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
-    process.load('RecoHI.HiEvtPlaneAlgos.pAEvtPlane_cfi')
     process.pACentrality.producePixelTracks = cms.bool(False)
 
-    process.recoCentralityEP = cms.Path(process.pACentrality
-                                      + process.pAEvtPlane)
+    process.recoCentrality = cms.Path(process.pACentrality)
 
-    process.schedule.append(process.recoCentralityEP)
+    process.schedule.append(process.recoCentrality)
 
     return process
 
 
-# Add ZDC, Centrality and Event Plane to AOD event content
+# Add ZDC, RPD and Centrality to AOD event content
 def storePPbAdditionalAOD(process):
 
     process.load('Configuration.EventContent.EventContent_cff')
@@ -201,14 +199,12 @@ def storePPbAdditionalAOD(process):
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_pAEvtPlane_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
-        process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_pAEvtPlane_*_*'])
 
     return process
 
@@ -217,7 +213,7 @@ def customisePPrecoforPPb(process):
     process=addHIIsolationProducer(process)
     process=storeCaloTowersAOD(process)
     process=addRhoProducer(process)
-    process=customiseRecoCentralityEP(process)
+    process=customiseRecoCentrality(process)
     process=storePPbAdditionalAOD(process)
 
     return process
