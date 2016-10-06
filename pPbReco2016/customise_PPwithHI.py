@@ -175,15 +175,17 @@ def addRhoProducer(process):
 
     return process
 
-# Add Centrality reconstruction in pp reco
-def customiseRecoCentrality(process):
+# Add Centrality and Event Plane reconstruction in pp reco
+def customiseRecoCentralityEP(process):
 
     process.load('RecoHI.HiCentralityAlgos.pACentrality_cfi')
+    process.load('RecoHI.HiEvtPlaneAlgos.pAEvtPlane_cfi')
     process.pACentrality.producePixelTracks = cms.bool(False)
 
-    process.recoCentrality = cms.Path(process.pACentrality)
+    process.recoCentralityEP = cms.Path(process.pACentrality
+                                      + process.pAEvtPlane)
 
-    process.schedule.append(process.recoCentrality)
+    process.schedule.append(process.recoCentralityEP)
 
     return process
 
@@ -199,12 +201,14 @@ def storePPbAdditionalAOD(process):
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
+        process.AODoutput.outputCommands.extend(['keep recoEvtPlanes_pAEvtPlane_*_*'])
 
     if hasattr(process,'AODSIMoutput'):
         process.AODSIMoutput.outputCommands.extend(['keep *_zdcreco_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_hcalDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep ZDCDataFramesSorted_castorDigis_*_*'])
         process.AODSIMoutput.outputCommands.extend(['keep recoCentrality*_pACentrality_*_*'])
+        process.AODSIMoutput.outputCommands.extend(['keep recoEvtPlanes_pAEvtPlane_*_*'])
 
     return process
 
@@ -213,7 +217,7 @@ def customisePPrecoforPPb(process):
     process=addHIIsolationProducer(process)
     process=storeCaloTowersAOD(process)
     process=addRhoProducer(process)
-    process=customiseRecoCentrality(process)
+    process=customiseRecoCentralityEP(process)
     process=storePPbAdditionalAOD(process)
 
     return process
